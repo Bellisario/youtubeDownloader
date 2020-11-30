@@ -9,7 +9,13 @@ app.use(cors());
 app.listen(PORT, () => {
 	console.log(`Server Works !!! At port ${PORT}`);
 });
-
+app.get('/', function (req, res, next) {
+    res.writeHead(200,{'Content-Type':'text/html'});
+    var myReadStream = fs.createReadStream(__dirname + '/index.html','utf8')
+    myReadStream.pipe(res);
+    //var value = getdata.deneme();
+    //console.log("Value: "+value);
+});
 app.get('/downloadmp3', async (req, res, next) => {
 	try {
 		var url = req.query.url;
